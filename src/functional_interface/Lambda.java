@@ -1,16 +1,16 @@
-package lambda;
+package functional_interface;
 
 import java.util.Comparator;
 
-public class Demo {
+public class Lambda {
     public static void main(String[] args) {
     /*
     * A comparator interface is used to order the objects of user-defined classes.
     * A comparator object is capable of comparing two objects of two different classes.
     *
-    * Using lambda expression to instantiate an interface
+    * Using interfacedemo.lambda expression to instantiate an interface
     *
-    * And a lambda expression can only implements an interface with a single abstract method
+    * And a interfacedemo.lambda expression can only implements an interface with a single abstract method
     *
     *
     * */
@@ -20,7 +20,10 @@ public class Demo {
                 return o1.compareTo(o2);
             }
         };
-        stringComparator.compare("AB", "CD");
+        System.out.println(stringComparator.compare("AB", "CD"));
         Comparator<String> stringComparatorLambda = (String o1, String o2) -> o1.compareTo(o2);
+        System.out.println(stringComparatorLambda.compare("AB", "CD"));
+
+
     }
 }
