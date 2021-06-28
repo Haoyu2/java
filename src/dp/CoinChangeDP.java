@@ -8,10 +8,14 @@ public class CoinChangeDP {
         }
         for (int i = 1; i < amount+1; i++) {
             for (int j = 0; j < coins.length; j++) {
-                if (i - coins[i] >=0)
-                M[i] = Math.min(M[i], 1 +M[i - coins[i]]);
+                if (i - coins[j] >=0)
+                M[i] = Math.min(M[i], 1 +M[i - coins[j]]);
             }
         }
         return M[amount];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minNum(140, new int[]{ 1, 10, 21, 34, 70, 100, 350, 1295, 1500 }));
     }
 }
