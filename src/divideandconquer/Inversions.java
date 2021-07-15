@@ -1,5 +1,7 @@
 package divideandconquer;
 
+import java.util.Arrays;
+
 public class Inversions {
     public static int bruteforce(int[] arr) {
         int res = 0;
@@ -26,10 +28,30 @@ public class Inversions {
         }
         return res;
     }
+// merger sort and count inversion
+    public static int merge(int[] arr, int lo, int hi, int mid, int[] copy) {
+        for (int i = lo; i < hi + 1; i++) copy[i] = arr[i];
+        int i = lo, j = mid + 1, k = lo;
 
-    public static int get(int[] arr){
+        int res = 0;
+        while (i <= mid || j <= hi) {
+            if (i > mid) arr[k++] = copy[j++];
+            else if (j > hi) arr[k++] = copy[i++];
+            else if( copy[i] > copy[j] ){
+                res += (mid + 1- i);
+                arr[k++] = copy[j++];
+            }else{
+                arr[k++] = copy[i++];
+            }
+        }
+
+        return res;
+    }
+
+
+    public static int get(int[] arr) {
         int[] copy = new int[arr.length];
-        return get( arr,  0, arr.length-1, (arr.length-1)/2, copy);
+        return divide(arr, 0, arr.length - 1, (arr.length - 1) / 2, copy);
     }
 // length: 1 2 3 4 5 6
 // index:  0 1 2 3 4
@@ -42,9 +64,31 @@ public class Inversions {
 //      for i=0, j=4, actual_mid = 1.5  4 / 2 = 2 = ceiling (1.5)
 
 
-//
-    private static int get(int[] arr, int lo, int hi, int mid, int[] copy) {
-        return 1;
+    //
+    public static int divide(int[] arr, int lo, int hi, int mid, int[] copy) {
+        if (lo >= hi) return 0;
+        int left = divide(arr, lo, mid, (lo + mid) / 2, copy);
+        int right = divide(arr, mid + 1, hi, (mid + 1 + hi) / 2, copy);
+
+        int merge = merge(arr, lo, hi, mid, copy);
+//        System.out.printf("left:%d, right:%d merge:%d\n", left,right,merge);
+        return left + right + merge;
+    }
+
+    public static int get_BU(int[] arr){
+        if (arr.length < 2) return 0;
+        int[] copy = Arrays.copyOf(arr, arr.length);
+        int res = 0;
+
+        for (int i = 1; i < arr.length ; i+=i) {
+            for (int j = 0; j < arr.length - i; j+=i + i) {
+
+                int hi = Math.min(j + 2*i - 1, arr.length-1);
+                int mid = (hi+j) / 2;
+                res += merge(arr, j, hi, mid, copy);
+            }
+        }
+        return res;
     }
 
 
@@ -59,6 +103,18 @@ public class Inversions {
 
         int[] arr3 = new int[]{3, 7, 10, 14, 18, 2, 11, 16, 20, 23};
         System.out.println(bruteforce(arr3));
+        System.out.println(Arrays.toString(arr3));
+//        System.out.println(merge(arr3, 0, arr.length-1, (arr.length-1)/2, arr3));
+
+        System.out.println(get(arr3));
+        System.out.println(Arrays.toString(arr3));
+
+        int[] arr4 = new int[]{3, 7, 10, 14, 18, 2, 11, 16, 20, 23};
+        System.out.println(get_BU(arr4));
+
+
+
+
 
 
     }
