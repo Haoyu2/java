@@ -156,9 +156,9 @@ public class DoublingTest {
 //        System.out.println(Arrays.toString(array(10)));
 //        System.out.println(linearTest());
 //        System.out.println(linearArithmeticTest());
-//        System.out.println(quadranticTest());
+        System.out.println(quadranticTest());
 //        System.out.println(cubicTest());
 //        System.out.println(quadraticArithmeticTest());
-        System.out.println(exponentialTest());
+//        System.out.println(exponentialTest());
     }
 }
