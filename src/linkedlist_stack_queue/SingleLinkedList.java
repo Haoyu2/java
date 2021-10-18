@@ -89,8 +89,8 @@ public class SingleLinkedList<T> implements Iterable<T> {
         for (int i: slist) System.out.println(i);
         System.out.println(slist.toString());
 //        System.out.println(slist.lastItem().val);
-//        slist.r();
-//        System.out.println(slist.toString());
+        slist.r();
+        System.out.println(slist.toString());
 //        System.out.println(slist.m().val);
 //        slist.ri();
 //        System.out.println(slist.toString());

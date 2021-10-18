@@ -6,13 +6,20 @@ public class MergeSort {
     public static int[] merge(int[] a, int[] b) {
 
         int[] res = new int[a.length + b.length];
-        int i = 0, j = 0, k = 0;
-        while (i < a.length || j < b.length) {
-            if (i >= a.length) res[k++] = b[j++];
-            else if (j >= b.length) res[k++] = a[i++];
-            else if (a[i] > b[j]) res[k++] = b[j++];
-            else res[k++] = a[i++];
+        int i = 0, j = 0;
+
+        for (int k = 0; k < res.length; k++){
+            if (i == a.length)  res[k] = b[j++];
+            else if (j == b.length) res[k] = a[i++];
+            else if (a[i] <b[j]) res[k] = a[i++];
+            else res[k] = b[j++];
         }
+//            while (i < a.length || j < b.length) {
+//                if (i >= a.length) res[k++] = b[j++];
+//                else if (j >= b.length) res[k++] = a[i++];
+//                else if (a[i] > b[j]) res[k++] = b[j++];
+//                else res[k++] = a[i++];
+//            }
 
         return res;
     }
