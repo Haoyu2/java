@@ -24,6 +24,15 @@ public class Student implements Comparable<Student> {
         }
     }
 
+    public static class ByName implements Comparator<Student>{
+
+        @Override
+        public int compare(Student o1, Student o2) {
+            return o1.name.compareTo(o2.name);
+        }
+    }
+
+
     @Override
     public String toString() {
         return "Student{" +
@@ -35,13 +44,23 @@ public class Student implements Comparable<Student> {
     public static void main(String[] args) {
         Student[] students = new Student[]{
                 new Student(1, "John"),
-                new Student(2, "Mike"),
-                new Student(3, "Alec"),
+                new Student(3, "Mike"),
+                new Student(2, "Alec"),
         };
 
         System.out.println(Arrays.toString(students));
+
+        Arrays.sort(students);
+        System.out.println(Arrays.toString(students));
+
+
+
         Arrays.sort(students, new Student.ReverseIDComparator());
         System.out.println(Arrays.toString(students));
+        Arrays.sort(students, new Student.ByName());
+        System.out.println(Arrays.toString(students));
+
+
 
         /*
         *  In line comparator
@@ -70,7 +89,8 @@ public class Student implements Comparable<Student> {
         System.out.println(Arrays.toString(students));
         Arrays.sort(students, (s1, st2)-> -s1.id - st2.id);
         System.out.println(Arrays.toString(students));
-
+        Arrays.sort(students, (s1, st2)-> s1.name.compareTo(st2.name));
+        System.out.println(Arrays.toString(students));
 
         /*
         *   There is more to this, you can find more tutorial online
