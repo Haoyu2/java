@@ -28,6 +28,10 @@ public class BST<Key extends Comparable<Key>, Value> {
     public BST() {
     }
 
+    public BST(Node<Key, Value> root) {
+        this.root = root;
+    }
+
     /**
      * Returns true if this symbol table is empty.
      * @return {@code true} if this symbol table is empty; {@code false} otherwise
